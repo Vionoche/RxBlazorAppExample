@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RxBlazorApp.Client\RxBlazorApp.Client.csproj" />
+    <ProjectReference Include="..\RxBlazorApp.Shared\RxBlazorApp.Shared.csproj" />
+  </ItemGroup>
+
+
+</Project>
