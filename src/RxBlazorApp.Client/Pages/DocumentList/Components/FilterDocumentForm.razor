@@ -1,0 +1,39 @@
+﻿<h4>Filter Documents</h4>
+
+<div class="form-group">
+    <label>Number</label>
+    <input type="text" @bind="@_number" class="form-control" />
+</div>
+<div class="form-group">
+    <label>Name</label>
+    <input type="text" @bind="@_name" class="form-control" />
+</div>
+<div>
+    <button @onclick="@ApplyFilter" class="btn btn-primary">Filter</button>
+    <button @onclick="@ClearFilter" class="btn btn-outline-primary">Clear</button>
+</div>
+
+@code {
+    [CascadingParameter(Name = "DocumentListStateContainer")]
+    private DocumentListStateContainer State { get; set; }
+
+    private string _number;
+    private string _name;
+    
+    private void ApplyFilter()
+    {
+        State.ApplyFilter(_number, _name);
+    }
+
+    private void ClearFilter()
+    {
+        ClearForm();
+        State.ClearFilter();
+    }
+    
+    private void ClearForm()
+    {
+        _number = "";
+        _name = "";
+    }
+}

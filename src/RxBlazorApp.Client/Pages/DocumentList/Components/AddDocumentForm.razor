@@ -1,0 +1,33 @@
+﻿<h4>Add Document</h4>
+
+<div class="form-group">
+    <label>Number</label>
+    <input type="text" @bind="@_number" class="form-control" />
+</div>
+<div class="form-group">
+    <label>Name</label>
+    <input type="text" @bind="@_name" class="form-control" />
+</div>
+<div>
+    <button @onclick="@AddDocument" class="btn btn-primary">Add</button>
+</div>
+
+@code {
+    [CascadingParameter(Name = "DocumentListStateContainer")]
+    private DocumentListStateContainer State { get; set; }
+
+    private string _number;
+    private string _name;
+    
+    private void AddDocument()
+    {
+        State.AddDocument(_number, _name);
+        ClearForm();
+    }
+
+    private void ClearForm()
+    {
+        _number = "";
+        _name = "";
+    }
+}

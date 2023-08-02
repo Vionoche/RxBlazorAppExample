@@ -1,0 +1,15 @@
+﻿@page "/"
+
+<h3>Reactive Document List</h3>
+
+<CascadingValue Name="DocumentListStateContainer" Value="@_state">
+    <FilterDocumentForm />
+    <hr />
+    <DocumentTable />
+    <hr />
+    <AddDocumentForm />
+</CascadingValue>
+
+@code {
+    private readonly DocumentListStateContainer _state = new();
+}

@@ -1,0 +1,28 @@
+﻿@if (_documents != null)
+{
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Document ID</th>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var document in _documents)
+        {
+            <tr>
+                <td>@document.DocumentId</td>
+                <td>@document.Number</td>
+                <td>@document.Name</td>
+                <td>@document.CreationDate.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading...</p>
+}
