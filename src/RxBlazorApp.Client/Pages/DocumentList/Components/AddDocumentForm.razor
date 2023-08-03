@@ -13,11 +13,12 @@
 </div>
 
 @code {
-    [CascadingParameter(Name = "DocumentListStateContainer")]
-    private DocumentListStateContainer State { get; set; }
 
-    private string _number;
-    private string _name;
+    [CascadingParameter(Name = "DocumentListStateContainer")]
+    private DocumentListStateContainer State { get; set; } = null!;
+
+    private string _number = "";
+    private string _name = "";
     
     private void AddDocument()
     {

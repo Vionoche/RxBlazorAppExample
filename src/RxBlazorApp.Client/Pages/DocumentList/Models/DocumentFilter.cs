@@ -5,7 +5,7 @@ namespace RxBlazorApp.Client.Pages.DocumentList.Models;
 
 public class DocumentFilter
 {
-    public IEnumerable<Document> ApplyFilter(IEnumerable<Document> documents, string number, string name)
+    public IEnumerable<Document> ApplyFilter(IEnumerable<Document> documents, string? number, string? name)
     {
         _number = number;
         _name = name;
