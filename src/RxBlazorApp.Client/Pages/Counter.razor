@@ -2,11 +2,19 @@
 
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
-
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<MudContainer Fixed="true">
+    <MudBreadcrumbs Items="@_breadcrumbItems"></MudBreadcrumbs>
+    
+    <MudCard>
+        <MudCardContent>
+            <MudText>Counter</MudText>
+            <MudText Typo="Typo.body2">Current count: @currentCount</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@IncrementCount">Click me</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudContainer>
 
 @code {
     private int currentCount = 0;
@@ -15,4 +23,10 @@
     {
         currentCount++;
     }
+    
+    private readonly List<BreadcrumbItem> _breadcrumbItems = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Counter", href: null, disabled: true)
+    };
 }
