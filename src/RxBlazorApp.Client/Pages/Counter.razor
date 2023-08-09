@@ -3,9 +3,10 @@
 <PageTitle>Counter</PageTitle>
 
 <MudContainer Fixed="true">
+
     <MudBreadcrumbs Items="@_breadcrumbItems"></MudBreadcrumbs>
     
-    <MudCard>
+    <MudCard Outlined="true">
         <MudCardContent>
             <MudText>Counter</MudText>
             <MudText Typo="Typo.body2">Current count: @currentCount</MudText>
@@ -14,6 +15,11 @@
             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@IncrementCount">Click me</MudButton>
         </MudCardActions>
     </MudCard>
+    
+    <MudPaper>
+        <MudText>Counter</MudText>
+    </MudPaper>
+    
 </MudContainer>
 
 @code {
