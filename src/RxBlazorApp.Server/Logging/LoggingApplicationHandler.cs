@@ -20,7 +20,7 @@ public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandle
     {
         const string handlerName = $"IApplicationHandler<{nameof(TRequest)}, {nameof(TResponse)}>";
         
-        _logger.LogTrace($"Start processing handler {handlerName}...");
+        _logger.LogInformation($"Start processing handler {handlerName}...");
 
         try
         {
@@ -34,7 +34,7 @@ public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandle
         }
         finally
         {
-            _logger.LogTrace($"End processing handler {handlerName}.");
+            _logger.LogInformation($"End processing handler {handlerName}.");
         }
     }
 

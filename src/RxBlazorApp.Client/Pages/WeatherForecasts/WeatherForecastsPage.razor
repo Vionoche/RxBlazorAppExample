@@ -1,7 +1,11 @@
 ﻿@page "/weather-forecasts"
+
 @using RxBlazorApp.Shared
 @using RxBlazorApp.Shared.WeatherForecasts
+@using System.Threading
+
 @inject HttpClient Http
+@inject IGetWeatherForecastQueryHandler GetWeatherForecastQueryHandler
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -43,7 +47,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await Http.GetFromJsonAsync<GetWeatherForecastResponse>("api/weather-forecasts");
+        // var response = await Http.GetFromJsonAsync<GetWeatherForecastResponse>("api/weather-forecasts");
+
+        // TODO: Extension for removing CancellationToken.None
+        var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery(), CancellationToken.None);
         forecasts = response?.WeatherForecasts;
     }
 }

@@ -10,7 +10,7 @@ namespace ApplicationHandlers.Http;
 
 public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<TRequest, TResponse>
 {
-    protected HttpQueryHandlerBase(HttpClient httpClient, Uri baseQueryUri)
+    protected HttpQueryHandlerBase(HttpClient httpClient, string baseQueryUri)
     {
         HttpClient = httpClient;
         BaseQueryUri = baseQueryUri;
@@ -25,7 +25,14 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
         httpResponse.EnsureSuccessStatusCode();
         
         var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
-        var response = JsonSerializer.Deserialize<TResponse>(responseJson);
+        
+        // TODO: move to global options
+        var response = JsonSerializer.Deserialize<TResponse>(
+            responseJson,
+            new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
 
         if (response == null)
         {
@@ -38,7 +45,7 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
 
     protected abstract IDictionary<string, string> GetQueryStringParameters(TRequest request);
 
-    private Uri GetQueryUri(IDictionary<string, string> parameters)
+    private string GetQueryUri(IDictionary<string, string> parameters)
     {
         if (parameters.Count == 0)
         {
@@ -53,11 +60,9 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
             parameterStringPairs.Add($"{name}={escapedValue}");
         }
 
-        var queryString = "?" + string.Join('&', parameterStringPairs);
-
-        return new Uri(BaseQueryUri, queryString);
+        return "BaseQueryUri?" + string.Join('&', parameterStringPairs);
     }
     
     protected readonly HttpClient HttpClient;
-    protected readonly Uri BaseQueryUri;
+    protected readonly string BaseQueryUri;
 }
