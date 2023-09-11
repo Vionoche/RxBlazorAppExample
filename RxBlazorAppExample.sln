@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{62D0D3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationHandlers.Http", "src\Common\ApplicationHandlers.Http\ApplicationHandlers.Http.csproj", "{830AD05A-C673-461C-A4EC-0C1818A45584}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBlazorApp", "src\RxBlazorApp\RxBlazorApp.csproj", "{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{830AD05A-C673-461C-A4EC-0C1818A45584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830AD05A-C673-461C-A4EC-0C1818A45584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830AD05A-C673-461C-A4EC-0C1818A45584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{62D0D3D6-5554-41B8-A6A0-EFE3C70D4654} = {E01AE2C4-80A1-4DE9-9BE4-9DBFAD809201}
 		{8973EAD2-F8FE-4C30-8105-D10283F228E6} = {62D0D3D6-5554-41B8-A6A0-EFE3C70D4654}
 		{830AD05A-C673-461C-A4EC-0C1818A45584} = {62D0D3D6-5554-41B8-A6A0-EFE3C70D4654}
+		{8F2199EA-B8B6-49CA-BAB9-9E0F21DB3A8D} = {E01AE2C4-80A1-4DE9-9BE4-9DBFAD809201}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53F6558F-0D37-422D-AC52-658E1C4B34CA}

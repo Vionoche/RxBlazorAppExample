@@ -8,4 +8,8 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
+  </ItemGroup>
 </Project>
