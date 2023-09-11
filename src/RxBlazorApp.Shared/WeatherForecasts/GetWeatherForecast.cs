@@ -3,7 +3,7 @@ using ApplicationHandlers;
 
 namespace RxBlazorApp.Shared.WeatherForecasts;
 
-public interface IGetWeatherForecastHandler : IQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>
+public interface IGetWeatherForecastQueryHandler : IQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>
 {
 }
 

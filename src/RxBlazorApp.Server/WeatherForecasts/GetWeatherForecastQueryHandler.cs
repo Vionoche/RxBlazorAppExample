@@ -7,7 +7,7 @@ using RxBlazorApp.WeatherForecasts;
 
 namespace RxBlazorApp.Server.WeatherForecasts;
 
-public class GetWeatherForecastHandler : IGetWeatherForecastHandler
+public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
 {
     public Task<GetWeatherForecastResponse> Handle(GetWeatherForecastQuery request, CancellationToken cancellationToken)
     {

@@ -6,20 +6,20 @@ using RxBlazorApp.Shared.WeatherForecasts;
 namespace RxBlazorApp.Server.WeatherForecasts;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/weather-forecasts")]
 public class WeatherForecastsController : ControllerBase
 {
-    public WeatherForecastsController(IGetWeatherForecastHandler getWeatherForecastHandler)
+    public WeatherForecastsController(IGetWeatherForecastQueryHandler getWeatherForecastQueryHandler)
     {
-        _getWeatherForecastHandler = getWeatherForecastHandler;
+        _getWeatherForecastQueryHandler = getWeatherForecastQueryHandler;
     }
 
     [HttpGet]
     public async Task<GetWeatherForecastResponse> Get(CancellationToken cancellationToken)
     {
-        var response = await _getWeatherForecastHandler.Handle(new GetWeatherForecastQuery(), cancellationToken);
+        var response = await _getWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery(), cancellationToken);
         return response;
     }
     
-    private readonly IGetWeatherForecastHandler _getWeatherForecastHandler;
+    private readonly IGetWeatherForecastQueryHandler _getWeatherForecastQueryHandler;
 }

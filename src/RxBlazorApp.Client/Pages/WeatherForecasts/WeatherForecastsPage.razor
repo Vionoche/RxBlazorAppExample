@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+﻿@page "/weather-forecasts"
 @using RxBlazorApp.Shared
 @using RxBlazorApp.Shared.WeatherForecasts
 @inject HttpClient Http
@@ -39,10 +39,11 @@ else
 }
 
 @code {
-    private WeatherForecastModel[]? forecasts;
+    private IReadOnlyCollection<WeatherForecastModel>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecastModel[]>("WeatherForecast");
+        var response = await Http.GetFromJsonAsync<GetWeatherForecastResponse>("api/weather-forecasts");
+        forecasts = response?.WeatherForecasts;
     }
 }
