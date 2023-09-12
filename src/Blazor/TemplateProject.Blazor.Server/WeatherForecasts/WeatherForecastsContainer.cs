@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
+using TemplateProject.Application.WeatherForecasts;
 
 namespace TemplateProject.Blazor.Server.WeatherForecasts;
 

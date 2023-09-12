@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
 using TemplateProject.WeatherForecasts;
 
-namespace TemplateProject.Blazor.Server.WeatherForecasts;
+namespace TemplateProject.Application.WeatherForecasts;
 
 public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
 {
@@ -28,7 +28,7 @@ public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
         return Task.FromResult(new GetWeatherForecastResponse(models));
     }
     
-    private static readonly string[] Summaries = 
+    private readonly static string[] Summaries = 
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
