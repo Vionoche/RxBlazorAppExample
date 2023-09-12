@@ -1,56 +1,54 @@
 ﻿@page "/weather-forecasts"
 
-@using RxBlazorApp.Shared
 @using RxBlazorApp.Shared.WeatherForecasts
 @using System.Threading
 
-@inject HttpClient Http
 @inject IGetWeatherForecastQueryHandler GetWeatherForecastQueryHandler
 
 <PageTitle>Weather forecast</PageTitle>
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<MudContainer Fixed="true">
+    
+    <MudBreadcrumbs Items="@_breadcrumbItems">Weather forecast</MudBreadcrumbs>
+    
+    <MudPaper Outlined="true" Class="pa-4 mb-2">
+        <MudText Typo="Typo.h6">Weather forecast</MudText>
+        <MudText>
+            <p>This component demonstrates fetching data from the server.</p>
+        </MudText>
+    </MudPaper>
+    
+    <MudTable Outlined="true" Items="@_forecasts" Hover="true">
+        <HeaderContent>
+            <MudTh>Date</MudTh>
+            <MudTh>Temp. (C)</MudTh>
+            <MudTh>Temp. (F)</MudTh>
+            <MudTh>Summary</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Date">@context.Date.ToShortDateString()</MudTd>
+            <MudTd DataLabel="TemperatureC">@context.TemperatureC</MudTd>
+            <MudTd DataLabel="TemperatureF">@context.TemperatureF</MudTd>
+            <MudTd DataLabel="Summary">@context.Summary</MudTd>
+        </RowTemplate>
+    </MudTable>
+    
+    
+</MudContainer>
 
 @code {
-    private IReadOnlyCollection<WeatherForecastModel>? forecasts;
-
     protected override async Task OnInitializedAsync()
     {
-        // var response = await Http.GetFromJsonAsync<GetWeatherForecastResponse>("api/weather-forecasts");
-
         // TODO: Extension for removing CancellationToken.None
         var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery(), CancellationToken.None);
-        forecasts = response?.WeatherForecasts;
+        _forecasts = response?.WeatherForecasts;
     }
+
+    private IReadOnlyCollection<WeatherForecastModel>? _forecasts;
+
+    private readonly List<BreadcrumbItem> _breadcrumbItems = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Weather Forecast", href: null, disabled: true)
+    };
 }

@@ -2,16 +2,32 @@
 
 <PageTitle>Reactive Document List</PageTitle>
 
-<h3>Reactive Document List</h3>
+<MudContainer Fixed="true">
+    
+    <MudBreadcrumbs Items="@_breadcrumbItems">Weather forecast</MudBreadcrumbs>
 
-<CascadingValue Name="DocumentListStateContainer" Value="@_state">
-    <FilterDocumentForm />
-    <hr />
-    <DocumentTable />
-    <hr />
-    <AddDocumentForm />
-</CascadingValue>
+    <CascadingValue Name="DocumentListStateContainer" Value="@_state">
+        <MudGrid Spacing="2">
+            <MudItem xs="12" sm="6">
+                <FilterDocumentForm/>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <AddDocumentForm/>
+            </MudItem>
+            <MudItem xs="12">
+                <DocumentTable/>
+            </MudItem>
+        </MudGrid>
+    </CascadingValue>
+    
+</MudContainer>
 
 @code {
     private readonly DocumentListStateContainer _state = new();
+    
+    private readonly List<BreadcrumbItem> _breadcrumbItems = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Reactive Document List", href: null, disabled: true)
+    };
 }

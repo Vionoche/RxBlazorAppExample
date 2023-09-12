@@ -7,19 +7,19 @@
     <MudBreadcrumbs Items="@_breadcrumbItems"></MudBreadcrumbs>
     
     <MudCard Outlined="true">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Counter</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
         <MudCardContent>
-            <MudText>Counter</MudText>
             <MudText Typo="Typo.body2">Current count: @currentCount</MudText>
         </MudCardContent>
         <MudCardActions>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@IncrementCount">Click me</MudButton>
         </MudCardActions>
     </MudCard>
-    
-    <MudPaper>
-        <MudText>Counter</MudText>
-    </MudPaper>
-    
+
 </MudContainer>
 
 @code {
