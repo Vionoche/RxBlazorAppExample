@@ -5,11 +5,11 @@ using RxBlazorApp.Shared.WeatherForecasts;
 
 namespace RxBlazorApp.Server.WeatherForecasts;
 
-public class LoggingWeatherForecastHandlers :
+public class LoggingGetWeatherForecastQueryHandler :
     LoggingApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>,
     IGetWeatherForecastQueryHandler
 {
-    public LoggingWeatherForecastHandlers(
+    public LoggingGetWeatherForecastQueryHandler(
         IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse> decoratedHandler,
         ILoggerFactory loggerFactory)
         : base(decoratedHandler, loggerFactory)

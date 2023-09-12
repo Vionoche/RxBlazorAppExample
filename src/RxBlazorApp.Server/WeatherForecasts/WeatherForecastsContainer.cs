@@ -10,7 +10,7 @@ public static class WeatherForecastsContainer
     public static IServiceCollection AddWeatherForecasts(this IServiceCollection services)
     {
         services.AddQueryHandler<IGetWeatherForecastQueryHandler, GetWeatherForecastQuery, GetWeatherForecastResponse>(
-            s => new LoggingWeatherForecastHandlers(
+            s => new LoggingGetWeatherForecastQueryHandler(
                 decoratedHandler: new GetWeatherForecastQueryHandler(),
                 loggerFactory: s.GetRequiredService<ILoggerFactory>()));
         
