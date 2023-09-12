@@ -1,0 +1,41 @@
+﻿@using TemplateProject.Blazor.Client.Pages.DocumentList.Models
+<MudCard Outlined="true">
+    
+    <MudCardContent>
+        <MudText Typo="Typo.h6">Filter Documents</MudText>
+        <MudTextField T="string" Label="Number" @bind-Value="@_number"/>
+        <MudTextField T="string" Label="Name" @bind-Value="@_name"/>
+    </MudCardContent>
+    
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@ApplyFilter">Filter</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@ClearFilter">Clear</MudButton>
+    </MudCardActions>
+    
+</MudCard>
+
+@code {
+
+    [CascadingParameter(Name = "DocumentListStateContainer")]
+    private DocumentListStateContainer State { get; set; } = null!;
+
+    private string? _number;
+    private string? _name;
+    
+    private void ApplyFilter()
+    {
+        State.ApplyFilter(_number, _name);
+    }
+
+    private void ClearFilter()
+    {
+        ClearForm();
+        State.ClearFilter();
+    }
+    
+    private void ClearForm()
+    {
+        _number = null;
+        _name = null;
+    }
+}
