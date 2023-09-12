@@ -1,7 +1,6 @@
 ﻿@page "/weather-forecasts"
 
 @using RxBlazorApp.Shared.WeatherForecasts
-@using System.Threading
 
 @inject IGetWeatherForecastQueryHandler GetWeatherForecastQueryHandler
 
@@ -39,8 +38,7 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        // TODO: Extension for removing CancellationToken.None
-        var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery(), CancellationToken.None);
+        var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery());
         _forecasts = response?.WeatherForecasts;
     }
 
