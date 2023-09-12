@@ -1,6 +1,6 @@
 using System;
 
-namespace RxBlazorApp.Shared.WeatherForecasts;
+namespace TemplateProject.Application.Abstractions.WeatherForecasts;
 
 public record WeatherForecastModel(
     DateOnly Date,

@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ApplicationHandlers.DependencyInjection;
+﻿using ApplicationHandlers.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using RxBlazorApp.Shared.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts;
 
-namespace RxBlazorApp.Server.WeatherForecasts;
+namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 public static class WeatherForecastsContainer
 {

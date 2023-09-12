@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Subjects;
 
-namespace RxBlazorApp.Client.Pages.DocumentList.Models;
+namespace TemplateProject.Blazor.Client.Pages.DocumentList.Models;
 
 public class DocumentListStateContainer
 {

@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RxBlazorApp.Shared.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts;
 
-namespace RxBlazorApp.Server.WeatherForecasts;
+namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 [ApiController]
 [Route("api/weather-forecasts")]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ApplicationHandlers;
 
-namespace RxBlazorApp.Shared.WeatherForecasts;
+namespace TemplateProject.Application.Abstractions.WeatherForecasts;
 
 public interface IGetWeatherForecastQueryHandler : IQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>
 {

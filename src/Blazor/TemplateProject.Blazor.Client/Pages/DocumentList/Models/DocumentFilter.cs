@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace RxBlazorApp.Client.Pages.DocumentList.Models;
+namespace TemplateProject.Blazor.Client.Pages.DocumentList.Models;
 
 public class DocumentFilter
 {

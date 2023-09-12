@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RxBlazorApp.Server.WeatherForecasts;
+using TemplateProject.Blazor.Server.WeatherForecasts;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
-using RxBlazorApp.Client.Pages.DocumentList.Models;
+using TemplateProject.Blazor.Client.Pages.DocumentList.Models;
 
-namespace RxBlazorApp.Client.Pages.DocumentList.Components;
+namespace TemplateProject.Blazor.Client.Pages.DocumentList.Components;
 
 public partial class DocumentTable : IDisposable
 {

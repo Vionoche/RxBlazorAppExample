@@ -1,9 +1,9 @@
 using ApplicationHandlers;
 using Microsoft.Extensions.Logging;
-using RxBlazorApp.Server.Logging;
-using RxBlazorApp.Shared.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts;
+using TemplateProject.Blazor.Server.Logging;
 
-namespace RxBlazorApp.Server.WeatherForecasts;
+namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 public class LoggingGetWeatherForecastQueryHandler :
     LoggingApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>,

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RxBlazorApp.Client.Pages.DocumentList.Models;
+namespace TemplateProject.Blazor.Client.Pages.DocumentList.Models;
 
 public record Document(
     Guid DocumentId,

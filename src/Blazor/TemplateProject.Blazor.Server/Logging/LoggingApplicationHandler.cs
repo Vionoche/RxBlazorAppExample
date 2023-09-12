@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ApplicationHandlers;
 using Microsoft.Extensions.Logging;
 
-namespace RxBlazorApp.Server.Logging;
+namespace TemplateProject.Blazor.Server.Logging;
 
 public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandler<TRequest, TResponse>
 {

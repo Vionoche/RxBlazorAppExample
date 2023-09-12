@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 using ApplicationHandlers.Http;
-using RxBlazorApp.Shared.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts;
 
-namespace RxBlazorApp.Client.Pages.WeatherForecasts.Models;
+namespace TemplateProject.Blazor.Client.Pages.WeatherForecasts.Models;
 
 public class HttpGetWeatherForecastQueryHandler :
     DefaultHttpQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>,

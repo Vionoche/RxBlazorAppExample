@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using RxBlazorApp.Shared.WeatherForecasts;
-using RxBlazorApp.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts;
+using TemplateProject.WeatherForecasts;
 
-namespace RxBlazorApp.Server.WeatherForecasts;
+namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
 {

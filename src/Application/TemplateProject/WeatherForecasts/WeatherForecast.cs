@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RxBlazorApp.WeatherForecasts;
+namespace TemplateProject.WeatherForecasts;
 
 public class WeatherForecast
 {
