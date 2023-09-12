@@ -11,12 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
-    <ProjectReference Include="..\RxBlazorApp.Client\RxBlazorApp.Client.csproj" />
-    <ProjectReference Include="..\RxBlazorApp.Shared\RxBlazorApp.Shared.csproj" />
-    <ProjectReference Include="..\RxBlazorApp\RxBlazorApp.csproj" />
+    <ProjectReference Include="..\TemplateProject.Blazor.Client\TemplateProject.Blazor.Client.csproj" />
+    <ProjectReference Include="..\TemplateProject.Application\TemplateProject.Application.csproj" />
   </ItemGroup>
-
-
-
-
+  
 </Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TemplateProject.Application.Abstractions\TemplateProject.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\TemplateProject\TemplateProject.csproj" />
+    </ItemGroup>
+
+</Project>

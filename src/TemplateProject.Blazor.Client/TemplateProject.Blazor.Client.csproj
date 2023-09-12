@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <RootNamespace>RxBlazorApp.Client</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\ApplicationHandlers.Http\ApplicationHandlers.Http.csproj" />
-    <ProjectReference Include="..\RxBlazorApp.Shared\RxBlazorApp.Shared.csproj" />
+    <ProjectReference Include="..\TemplateProject.Application.Abstractions\TemplateProject.Application.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
