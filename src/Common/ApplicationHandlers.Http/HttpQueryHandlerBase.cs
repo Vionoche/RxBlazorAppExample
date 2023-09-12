@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationHandlers.Http.Exceptions;
+using ApplicationHandlers.Http.Json;
 
 namespace ApplicationHandlers.Http;
 
@@ -25,14 +25,7 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
         httpResponse.EnsureSuccessStatusCode();
         
         var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
-        
-        // TODO: move to global options
-        var response = JsonSerializer.Deserialize<TResponse>(
-            responseJson,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+        var response = JsonHelper.Deserialize<TResponse>(responseJson);
 
         if (response == null)
         {

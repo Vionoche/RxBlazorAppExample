@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationHandlers.Http.Exceptions;
+using ApplicationHandlers.Http.Json;
 
 namespace ApplicationHandlers.Http;
 
@@ -17,14 +17,14 @@ public class HttpCommandHandler<TRequest, TResponse> : ICommandHandler<TRequest,
     
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var requestJson = JsonSerializer.Serialize(request);
+        var requestJson = JsonHelper.Serialize(request);
         var content = new StringContent(requestJson);
 
         var httpResponse = await _httpClient.PostAsync(_commandUri, content, cancellationToken);
         httpResponse.EnsureSuccessStatusCode();
 
         var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
-        var response = JsonSerializer.Deserialize<TResponse>(responseJson);
+        var response = JsonHelper.Deserialize<TResponse>(responseJson);
 
         if (response == null)
         {
@@ -49,7 +49,7 @@ public class HttpCommandHandler<TRequest> : ICommandHandler<TRequest>
     
     public async Task Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var requestJson = JsonSerializer.Serialize(request);
+        var requestJson = JsonHelper.Serialize(request);
         var content = new StringContent(requestJson);
 
         var httpResponse = await _httpClient.PostAsync(_commandUri, content, cancellationToken);
