@@ -14,7 +14,7 @@ public class DocumentListStateContainer
         _documentListSubject.OnNext(_documents);
     }
 
-    public void ApplyFilter(string number, string name)
+    public void ApplyFilter(string? number, string? name)
     {
         var filteredDocuments = _documentFilter
             .ApplyFilter(_documents, number, name)

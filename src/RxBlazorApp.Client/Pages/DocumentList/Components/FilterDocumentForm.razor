@@ -1,24 +1,25 @@
-﻿<h4>Filter Documents</h4>
-
-<div class="form-group">
-    <label>Number</label>
-    <input type="text" @bind="@_number" class="form-control" />
-</div>
-<div class="form-group">
-    <label>Name</label>
-    <input type="text" @bind="@_name" class="form-control" />
-</div>
-<div>
-    <button @onclick="@ApplyFilter" class="btn btn-primary">Filter</button>
-    <button @onclick="@ClearFilter" class="btn btn-outline-primary">Clear</button>
-</div>
+﻿<MudCard Outlined="true">
+    
+    <MudCardContent>
+        <MudText Typo="Typo.h6">Filter Documents</MudText>
+        <MudTextField T="string" Label="Number" @bind-Value="@_number"/>
+        <MudTextField T="string" Label="Name" @bind-Value="@_name"/>
+    </MudCardContent>
+    
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@ApplyFilter">Filter</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@ClearFilter">Clear</MudButton>
+    </MudCardActions>
+    
+</MudCard>
 
 @code {
-    [CascadingParameter(Name = "DocumentListStateContainer")]
-    private DocumentListStateContainer State { get; set; }
 
-    private string _number;
-    private string _name;
+    [CascadingParameter(Name = "DocumentListStateContainer")]
+    private DocumentListStateContainer State { get; set; } = null!;
+
+    private string? _number;
+    private string? _name;
     
     private void ApplyFilter()
     {
@@ -33,7 +34,7 @@
     
     private void ClearForm()
     {
-        _number = "";
-        _name = "";
+        _number = null;
+        _name = null;
     }
 }

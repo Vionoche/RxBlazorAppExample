@@ -1,0 +1,52 @@
+﻿@page "/weather-forecasts"
+
+@using RxBlazorApp.Shared.WeatherForecasts
+
+@inject IGetWeatherForecastQueryHandler GetWeatherForecastQueryHandler
+
+<PageTitle>Weather forecast</PageTitle>
+
+<MudContainer Fixed="true">
+    
+    <MudBreadcrumbs Items="@_breadcrumbItems">Weather forecast</MudBreadcrumbs>
+    
+    <MudPaper Outlined="true" Class="pa-4 mb-2">
+        <MudText Typo="Typo.h6">Weather forecast</MudText>
+        <MudText>
+            <p>This component demonstrates fetching data from the server.</p>
+        </MudText>
+    </MudPaper>
+    
+    <MudTable Outlined="true" Items="@_forecasts" Hover="true">
+        <HeaderContent>
+            <MudTh>Date</MudTh>
+            <MudTh>Temp. (C)</MudTh>
+            <MudTh>Temp. (F)</MudTh>
+            <MudTh>Summary</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Date">@context.Date.ToShortDateString()</MudTd>
+            <MudTd DataLabel="TemperatureC">@context.TemperatureC</MudTd>
+            <MudTd DataLabel="TemperatureF">@context.TemperatureF</MudTd>
+            <MudTd DataLabel="Summary">@context.Summary</MudTd>
+        </RowTemplate>
+    </MudTable>
+    
+    
+</MudContainer>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery());
+        _forecasts = response?.WeatherForecasts;
+    }
+
+    private IReadOnlyCollection<WeatherForecastModel>? _forecasts;
+
+    private readonly List<BreadcrumbItem> _breadcrumbItems = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Weather Forecast", href: null, disabled: true)
+    };
+}
