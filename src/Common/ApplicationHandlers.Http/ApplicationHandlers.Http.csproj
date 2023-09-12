@@ -8,7 +8,5 @@
     <ItemGroup>
       <ProjectReference Include="..\ApplicationHandlers\ApplicationHandlers.csproj" />
     </ItemGroup>
-
-
-
+    
 </Project>

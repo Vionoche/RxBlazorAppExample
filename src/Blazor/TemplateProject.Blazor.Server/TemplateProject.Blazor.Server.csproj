@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
     <ProjectReference Include="..\TemplateProject.Blazor.Client\TemplateProject.Blazor.Client.csproj" />
-    <ProjectReference Include="..\TemplateProject.Application\TemplateProject.Application.csproj" />
+    <ProjectReference Include="..\..\Application\TemplateProject.Application\TemplateProject.Application.csproj" />
+    <ProjectReference Include="..\..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
   </ItemGroup>
   
 </Project>

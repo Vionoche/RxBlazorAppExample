@@ -14,15 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\ApplicationHandlers.Http\ApplicationHandlers.Http.csproj" />
-    <ProjectReference Include="..\TemplateProject.Application.Abstractions\TemplateProject.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Application\TemplateProject.Application.Abstractions\TemplateProject.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Common\ApplicationHandlers.Http\ApplicationHandlers.Http.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
-  </ItemGroup>
-
-
 
 </Project>

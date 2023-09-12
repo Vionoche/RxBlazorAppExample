@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
+    <ProjectReference Include="..\..\Common\ApplicationHandlers\ApplicationHandlers.csproj" />
   </ItemGroup>
+  
 </Project>
