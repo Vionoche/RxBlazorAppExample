@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationHandlers;
@@ -10,18 +11,17 @@ public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandle
 {
     public LoggingApplicationHandler(
         IApplicationHandler<TRequest, TResponse> decoratedHandler,
-        ILogger<LoggingApplicationHandler<TRequest, TResponse>> logger)
+        ILoggerFactory loggerFactory)
     {
         _decoratedHandler = decoratedHandler;
-        _logger = logger;
+        _logger = loggerFactory.CreateLogger(decoratedHandler.GetType()?.FullName ?? "LoggingApplicationHandler");
     }
     
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        const string handlerName = $"IApplicationHandler<{nameof(TRequest)}, {nameof(TResponse)}>";
-        
-        _logger.LogInformation($"Start processing handler {handlerName}...");
+        _logger.LogInformation($"Start processing handler");
 
+        var stopWatch = Stopwatch.StartNew();
         try
         {
             var response = await _decoratedHandler.Handle(request, cancellationToken);
@@ -34,10 +34,11 @@ public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandle
         }
         finally
         {
-            _logger.LogInformation($"End processing handler {handlerName}.");
+            stopWatch.Stop();
+            _logger.LogInformation($"End processing handler in {stopWatch.Elapsed}");
         }
     }
 
     private readonly IApplicationHandler<TRequest, TResponse> _decoratedHandler;
-    private readonly ILogger<LoggingApplicationHandler<TRequest, TResponse>> _logger;
+    private readonly ILogger _logger;
 }

@@ -28,7 +28,7 @@ public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
         return Task.FromResult(new GetWeatherForecastResponse(models));
     }
     
-    private readonly static string[] Summaries = 
+    private static readonly string[] Summaries = 
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
