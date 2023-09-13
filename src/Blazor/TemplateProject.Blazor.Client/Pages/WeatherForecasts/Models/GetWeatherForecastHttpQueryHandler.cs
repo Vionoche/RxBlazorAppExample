@@ -4,11 +4,11 @@ using TemplateProject.Application.Abstractions.WeatherForecasts;
 
 namespace TemplateProject.Blazor.Client.Pages.WeatherForecasts.Models;
 
-public class HttpGetWeatherForecastQueryHandler :
+public class GetWeatherForecastHttpQueryHandler :
     DefaultHttpQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>,
     IGetWeatherForecastQueryHandler
 {
-    public HttpGetWeatherForecastQueryHandler(HttpClient httpClient) : base(httpClient, "api/weather-forecasts")
+    public GetWeatherForecastHttpQueryHandler(HttpClient httpClient) : base(httpClient, "api/weather-forecasts")
     {
     }
 }

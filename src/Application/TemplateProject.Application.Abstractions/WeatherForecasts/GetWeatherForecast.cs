@@ -7,6 +7,8 @@ public interface IGetWeatherForecastQueryHandler : IQueryHandler<GetWeatherForec
 {
 }
 
-public record GetWeatherForecastQuery();
+public record GetWeatherForecastQuery(
+    int PageIndex,
+    int PageSize);
 
 public record GetWeatherForecastResponse(IReadOnlyCollection<WeatherForecastModel> WeatherForecasts);
