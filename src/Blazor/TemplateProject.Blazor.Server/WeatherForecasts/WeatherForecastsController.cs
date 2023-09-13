@@ -15,9 +15,13 @@ public class WeatherForecastsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<GetWeatherForecastResponse> Get(CancellationToken cancellationToken)
+    public async Task<GetWeatherForecastResponse> Get(
+        [FromQuery]int pageIndex,
+        [FromQuery]int pageSize,
+        CancellationToken cancellationToken)
     {
-        var response = await _getWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery(), cancellationToken);
+        var response = await _getWeatherForecastQueryHandler.Handle(
+            new GetWeatherForecastQuery(pageIndex, pageSize), cancellationToken);
         return response;
     }
     

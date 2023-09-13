@@ -25,7 +25,12 @@ public class DefaultHttpQueryHandler<TRequest, TResponse> : HttpQueryHandlerBase
         foreach (var property in properties)
         {
             var name = property.Name;
-            var value = property.GetValue(request)?.ToString() ?? string.Empty;
+            var value = property.GetValue(request)?.ToString();
+            
+            if (value == null)
+            {
+                continue;
+            }
 
             if (!queryStringParameters.TryAdd(name, value))
             {

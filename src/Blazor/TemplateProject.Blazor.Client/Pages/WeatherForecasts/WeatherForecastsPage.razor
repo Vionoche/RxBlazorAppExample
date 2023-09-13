@@ -37,7 +37,9 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        var response = await GetWeatherForecastQueryHandler.Handle(new GetWeatherForecastQuery());
+        var response = await GetWeatherForecastQueryHandler.Handle(
+            new GetWeatherForecastQuery(PageIndex: 1, PageSize: 20));
+        
         _forecasts = response?.WeatherForecasts;
     }
 

@@ -53,7 +53,7 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
             parameterStringPairs.Add($"{name}={escapedValue}");
         }
 
-        return "BaseQueryUri?" + string.Join('&', parameterStringPairs);
+        return BaseQueryUri +"?" + string.Join('&', parameterStringPairs);
     }
     
     protected readonly HttpClient HttpClient;
