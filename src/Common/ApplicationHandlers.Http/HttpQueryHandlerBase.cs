@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationHandlers.Http.Exceptions;
-using ApplicationHandlers.Http.Json;
+using ApplicationHandlers.Http.Helpers;
 
 namespace ApplicationHandlers.Http;
 
@@ -12,18 +12,18 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
 {
     protected HttpQueryHandlerBase(HttpClient httpClient, string baseQueryUri)
     {
-        HttpClient = httpClient;
-        BaseQueryUri = baseQueryUri;
+        _httpClient = httpClient;
+        _baseQueryUri = baseQueryUri;
     }
-    
+
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
         var parameters = GetQueryStringParameters(request);
         var queryUri = GetQueryUri(parameters);
-        
-        var httpResponse = await HttpClient.GetAsync(queryUri, cancellationToken);
+
+        var httpResponse = await _httpClient.GetAsync(queryUri, cancellationToken);
         httpResponse.EnsureSuccessStatusCode();
-        
+
         var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
         var response = JsonHelper.Deserialize<TResponse>(responseJson);
 
@@ -42,20 +42,20 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
     {
         if (parameters.Count == 0)
         {
-            return BaseQueryUri;
+            return _baseQueryUri;
         }
 
         var parameterStringPairs = new List<string>(parameters.Count);
-        
+
         foreach (var (name, value) in parameters)
         {
             var escapedValue = Uri.EscapeDataString(value);
             parameterStringPairs.Add($"{name}={escapedValue}");
         }
 
-        return BaseQueryUri +"?" + string.Join('&', parameterStringPairs);
+        return _baseQueryUri +"?" + string.Join('&', parameterStringPairs);
     }
-    
-    protected readonly HttpClient HttpClient;
-    protected readonly string BaseQueryUri;
+
+    protected readonly HttpClient _httpClient;
+    protected readonly string _baseQueryUri;
 }

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace ApplicationHandlers.Http.Json;
+namespace ApplicationHandlers.Http.Helpers;
 
 public static class JsonHelper
 {
@@ -8,12 +8,12 @@ public static class JsonHelper
     {
         return JsonSerializer.Serialize(value);
     }
-    
+
     public static T? Deserialize<T>(string json)
     {
         return JsonSerializer.Deserialize<T>(json, DefaultOptions);
     }
-    
+
     private static readonly JsonSerializerOptions? DefaultOptions = new()
     {
         PropertyNameCaseInsensitive = true
