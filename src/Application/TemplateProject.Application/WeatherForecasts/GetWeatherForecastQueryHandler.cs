@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
+using TemplateProject.Application.Abstractions.WeatherForecasts.Models;
 using TemplateProject.WeatherForecasts;
 
 namespace TemplateProject.Application.WeatherForecasts;

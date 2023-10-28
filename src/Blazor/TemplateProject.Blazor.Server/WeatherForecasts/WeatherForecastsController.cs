@@ -6,7 +6,6 @@ using TemplateProject.Application.Abstractions.WeatherForecasts;
 namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 [ApiController]
-[Route("api/weather-forecasts")]
 public class WeatherForecastsController : ControllerBase
 {
     public WeatherForecastsController(IGetWeatherForecastQueryHandler getWeatherForecastQueryHandler)
@@ -14,7 +13,7 @@ public class WeatherForecastsController : ControllerBase
         _getWeatherForecastQueryHandler = getWeatherForecastQueryHandler;
     }
 
-    [HttpGet]
+    [HttpGet(WeatherForecastsEndpoints.GetWeatherForecast)]
     public async Task<GetWeatherForecastResponse> Get(
         [FromQuery]int pageIndex,
         [FromQuery]int pageSize,

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using ApplicationHandlers.Http.Exceptions;
 using ApplicationHandlers.Http.Helpers;
 
+
 namespace ApplicationHandlers.Http;
 
-public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<TRequest, TResponse>
+public abstract class HttpQueryHandlerBase<TRequest, TResponse, TExceptionData> : IQueryHandler<TRequest, TResponse>
 {
     protected HttpQueryHandlerBase(HttpClient httpClient, string baseQueryUri)
     {
@@ -22,7 +23,8 @@ public abstract class HttpQueryHandlerBase<TRequest, TResponse> : IQueryHandler<
         var queryUri = GetQueryUri(parameters);
 
         var httpResponse = await _httpClient.GetAsync(queryUri, cancellationToken);
-        httpResponse.EnsureSuccessStatusCode();
+
+        await HttpResponseMessageHelper<TExceptionData>.EnsureSuccessStatusCode(httpResponse);
 
         var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
         var response = JsonHelper.Deserialize<TResponse>(responseJson);

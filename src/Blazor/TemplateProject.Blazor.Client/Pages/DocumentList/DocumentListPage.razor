@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using TemplateProject.Blazor.Client.Pages.DocumentList.Models
+@attribute [Authorize(Roles = "User")]
 
 <PageTitle>Reactive Document List</PageTitle>
 
