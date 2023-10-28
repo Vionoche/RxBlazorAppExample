@@ -8,11 +8,13 @@ namespace TemplateProject.Blazor.Server.WeatherForecasts;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddWeatherForecasts(this IServiceCollection services)
+    public static IServiceCollection AddWeatherForecastHandlers(this IServiceCollection services)
     {
         services
-            .AddQueryHandler<IGetWeatherForecastQueryHandler, GetWeatherForecastQuery, GetWeatherForecastResponse, GetWeatherForecastQueryHandler>()
-            .Decorate<IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>, GetWeatherForecastLoggingHandler>();
+            .AddQueryHandler<IGetWeatherForecastQueryHandler,
+                GetWeatherForecastQuery, GetWeatherForecastResponse, GetWeatherForecastQueryHandler>()
+            .Decorate<IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>,
+                GetWeatherForecastLoggingHandler>();
         
         return services;
     }

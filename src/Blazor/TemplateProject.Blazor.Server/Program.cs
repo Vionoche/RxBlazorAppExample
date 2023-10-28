@@ -1,26 +1,32 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TemplateProject.Blazor.Server.Authentication;
+using TemplateProject.Blazor.Server.Exceptions;
 using TemplateProject.Blazor.Server.WeatherForecasts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services
-    .AddControllersWithViews()
+    .AddHttpContextAccessor()
+    .AddControllersWithViews(options =>
+    {
+        options.Filters.Add<ApplicationHandlerExceptionAttribute>();
+    })
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
-builder.Services.AddRazorPages();
+builder.Services
+    .AddRazorPages();
 
-builder.Services.AddWeatherForecasts();
+builder.Services
+    .AddAuthenticationHandlers()
+    .AddWeatherForecastHandlers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
@@ -28,18 +34,13 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");

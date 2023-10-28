@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ApplicationHandlers;
+using TemplateProject.Application.Abstractions.WeatherForecasts.Models;
 
 namespace TemplateProject.Application.Abstractions.WeatherForecasts;
 

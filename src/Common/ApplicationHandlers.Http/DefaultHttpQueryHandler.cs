@@ -4,7 +4,7 @@ using ApplicationHandlers.Http.Exceptions;
 
 namespace ApplicationHandlers.Http;
 
-public class DefaultHttpQueryHandler<TRequest, TResponse> : HttpQueryHandlerBase<TRequest, TResponse>
+public class DefaultHttpQueryHandler<TRequest, TResponse, TExceptionData> : HttpQueryHandlerBase<TRequest, TResponse, TExceptionData>
 {
     public DefaultHttpQueryHandler(HttpClient httpClient, string baseQueryUri) : base(httpClient, baseQueryUri)
     {
@@ -16,7 +16,7 @@ public class DefaultHttpQueryHandler<TRequest, TResponse> : HttpQueryHandlerBase
 
         if (!requestType.IsClass)
         {
-            return new Dictionary<string, string>();    
+            return new Dictionary<string, string>();
         }
 
         var queryStringParameters = new Dictionary<string, string>();
@@ -26,7 +26,7 @@ public class DefaultHttpQueryHandler<TRequest, TResponse> : HttpQueryHandlerBase
         {
             var name = property.Name;
             var value = property.GetValue(request)?.ToString();
-            
+
             if (value == null)
             {
                 continue;

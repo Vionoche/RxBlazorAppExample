@@ -1,6 +1,7 @@
 ﻿using ApplicationHandlers.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
+using TemplateProject.Blazor.Client.Pages.WeatherForecasts.Handlers;
 
 namespace TemplateProject.Blazor.Client.Pages.WeatherForecasts.Models;
 

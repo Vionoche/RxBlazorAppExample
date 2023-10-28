@@ -8,6 +8,17 @@
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudText Typo="Typo.h5" Class="ml-3">Reactive Blazor App Example</MudText>
+        <MudSpacer/>
+        <AuthorizeView>
+            <Authorized>
+                <MudText Typo="Typo.body2">
+                    @context.User.Identity!.Name
+                </MudText>
+            </Authorized>
+            <NotAuthorized>
+                Access denied
+            </NotAuthorized>
+        </AuthorizeView>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu></NavMenu>

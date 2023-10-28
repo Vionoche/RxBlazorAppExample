@@ -1,30 +1,28 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+
 using ApplicationHandlers.Http.Exceptions;
-using ApplicationHandlers.Http.Json;
+using ApplicationHandlers.Http.Helpers;
+
 
 namespace ApplicationHandlers.Http;
 
-public class HttpCommandHandler<TRequest, TResponse> : ICommandHandler<TRequest, TResponse>
+public class HttpCommandHandler<TRequest, TResponse, TExceptionData> : HttpCommandHandlerBase<TRequest, TResponse, TExceptionData>
 {
-    public HttpCommandHandler(HttpClient httpClient, Uri commandUri)
+    public HttpCommandHandler(HttpClient httpClient, string commandUri)
     {
         _httpClient = httpClient;
         _commandUri = commandUri;
     }
-    
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
+
+    public override async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var requestJson = JsonHelper.Serialize(request);
-        var content = new StringContent(requestJson);
+        var responseJson = await PerformPostRequest(_httpClient, _commandUri, request, cancellationToken);
 
-        var httpResponse = await _httpClient.PostAsync(_commandUri, content, cancellationToken);
-        httpResponse.EnsureSuccessStatusCode();
-
-        var responseJson = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
-        var response = JsonHelper.Deserialize<TResponse>(responseJson);
+        var response = !string.IsNullOrEmpty(responseJson)
+            ? JsonHelper.Deserialize<TResponse>(responseJson)
+            : default;
 
         if (response == null)
         {
@@ -34,30 +32,32 @@ public class HttpCommandHandler<TRequest, TResponse> : ICommandHandler<TRequest,
 
         return response;
     }
-    
+
     private readonly HttpClient _httpClient;
-    private readonly Uri _commandUri;
+    private readonly string _commandUri;
 }
 
-public class HttpCommandHandler<TRequest> : ICommandHandler<TRequest>
+public class HttpCommandHandler<TRequest, TExceptionData> :
+    HttpCommandHandlerBase<TRequest, Unit, TExceptionData>,
+    ICommandHandler<TRequest>
 {
-    public HttpCommandHandler(HttpClient httpClient, Uri commandUri)
+    public HttpCommandHandler(HttpClient httpClient, string commandUri)
     {
         _httpClient = httpClient;
         _commandUri = commandUri;
     }
-    
-    public async Task Handle(TRequest request, CancellationToken cancellationToken)
+
+    public override async Task<Unit> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var requestJson = JsonHelper.Serialize(request);
-        var content = new StringContent(requestJson);
-
-        var httpResponse = await _httpClient.PostAsync(_commandUri, content, cancellationToken);
-        httpResponse.EnsureSuccessStatusCode();
-
-        await httpResponse.Content.ReadAsStringAsync(cancellationToken);
+        await PerformPostRequest(_httpClient, _commandUri, request, cancellationToken);
+        return Unit.Value;
     }
-    
+
+    async Task ICommandHandler<TRequest>.Handle(TRequest request, CancellationToken cancellationToken)
+    {
+        await PerformPostRequest(_httpClient, _commandUri, request, cancellationToken);
+    }
+
     private readonly HttpClient _httpClient;
-    private readonly Uri _commandUri;
+    private readonly string _commandUri;
 }
