@@ -5,97 +5,65 @@ namespace ApplicationHandlers.DependencyInjection;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddApplicationHandler<THandler, TRequest, TResponse, TImplementation>(
+    public static IServiceCollection AddApplicationHandler<TRequest, TResponse, TImplementation>(
         this IServiceCollection services)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
-        where TImplementation : class, THandler
+        where TImplementation : class, IApplicationHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
-            .AddScoped<IApplicationHandler<TRequest, TResponse>, TImplementation>()
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+        return services
+            .AddScoped<IApplicationHandler<TRequest, TResponse>, TImplementation>();
     }
 
-    public static IServiceCollection AddApplicationHandler<THandler, TRequest, TResponse>(
+    public static IServiceCollection AddApplicationHandler<TRequest, TResponse>(
         this IServiceCollection services,
         Func<IServiceProvider, IApplicationHandler<TRequest, TResponse>> implementationFactory)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
-            .AddScoped(implementationFactory)
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+        return services
+            .AddScoped(implementationFactory);
     }
 
-    public static IServiceCollection AddCommandHandler<THandler, TRequest, TResponse, TImplementation>(
+    public static IServiceCollection AddCommandHandler<TRequest, TResponse, TImplementation>(
         this IServiceCollection services)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
-        where TImplementation : class, THandler
+        where TImplementation : class, ICommandHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
+        return services
             .AddScoped<IApplicationHandler<TRequest, TResponse>, TImplementation>()
             .AddScoped<ICommandHandler<TRequest, TResponse>>(
-                s => (ICommandHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>())
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+                s => (ICommandHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
     }
 
-    public static IServiceCollection AddCommandHandler<THandler, TRequest, TImplementation>(
-        this IServiceCollection services)
-        where THandler : class, IApplicationHandler<TRequest, Unit>
-        where TImplementation : class, THandler
-    {
-        return services.AddCommandHandler<THandler, TRequest, Unit, TImplementation>();
-    }
-
-    public static IServiceCollection AddCommandHandler<THandler, TRequest, TResponse>(
+    public static IServiceCollection AddCommandHandler<TRequest, TResponse>(
         this IServiceCollection services,
         Func<IServiceProvider, IApplicationHandler<TRequest, TResponse>> implementationFactory)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
+        return services
             .AddScoped(implementationFactory)
             .AddScoped<ICommandHandler<TRequest, TResponse>>(
-                s => (ICommandHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>())
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+                s => (ICommandHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
     }
 
-    public static IServiceCollection AddQueryHandler<THandler, TRequest, TResponse, TImplementation>(
+    public static IServiceCollection AddQueryHandler<TRequest, TResponse, TImplementation>(
         this IServiceCollection services)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
-        where TImplementation : class, THandler
+        where TImplementation : class, IApplicationHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
+        return services
             .AddScoped<IApplicationHandler<TRequest, TResponse>, TImplementation>()
             .AddScoped<IQueryHandler<TRequest, TResponse>>(
-                s => (IQueryHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>())
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+                s => (IQueryHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
     }
 
     public static IServiceCollection AddQueryHandler<THandler, TRequest, TResponse>(
         this IServiceCollection services,
         Func<IServiceProvider, IApplicationHandler<TRequest, TResponse>> implementationFactory)
-        where THandler : class, IApplicationHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        services
+        return services
             .AddScoped(implementationFactory)
             .AddScoped<IQueryHandler<TRequest, TResponse>>(
-                s => (IQueryHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>())
-            .AddScoped<THandler>(
-                s => (THandler)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
-
-        return services;
+                s => (IQueryHandler<TRequest, TResponse>)s.GetRequiredService<IApplicationHandler<TRequest, TResponse>>());
     }
 }

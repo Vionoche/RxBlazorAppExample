@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using ApplicationHandlers;
 using Microsoft.AspNetCore.Mvc;
 using TemplateProject.Application.Abstractions.Authentication;
 
@@ -8,7 +9,8 @@ namespace TemplateProject.Blazor.Server.Authentication;
 [ApiController]
 public class AuthenticatedUserController : ControllerBase
 {
-    public AuthenticatedUserController(IGetAuthenticatedUserHandler getAuthenticatedUserHandler)
+    public AuthenticatedUserController(
+        IApplicationHandler<GetAuthenticatedUserQuery, GetAuthenticatedUserResponse> getAuthenticatedUserHandler)
     {
         _getAuthenticatedUserHandler = getAuthenticatedUserHandler;
     }
@@ -20,5 +22,5 @@ public class AuthenticatedUserController : ControllerBase
         return response;
     }
 
-    private readonly IGetAuthenticatedUserHandler _getAuthenticatedUserHandler;
+    private readonly IApplicationHandler<GetAuthenticatedUserQuery, GetAuthenticatedUserResponse> _getAuthenticatedUserHandler;
 }

@@ -11,7 +11,7 @@ namespace TemplateProject.Blazor.Client.Authentication;
 public class ClientAuthenticationStateProvider : AuthenticationStateProvider
 {
     public ClientAuthenticationStateProvider(
-        IGetAuthenticatedUserHandler getAuthenticatedUserHandler,
+        IApplicationHandler<GetAuthenticatedUserQuery, GetAuthenticatedUserResponse> getAuthenticatedUserHandler,
         ILogger<ClientAuthenticationStateProvider> logger)
     {
         _getAuthenticatedUserHandler = getAuthenticatedUserHandler;
@@ -77,6 +77,6 @@ public class ClientAuthenticationStateProvider : AuthenticationStateProvider
     private const string NameClaimType = "name";
     private const string RoleClaimType = "role";
 
-    private readonly IGetAuthenticatedUserHandler _getAuthenticatedUserHandler;
+    private readonly IApplicationHandler<GetAuthenticatedUserQuery, GetAuthenticatedUserResponse> _getAuthenticatedUserHandler;
     private readonly ILogger<ClientAuthenticationStateProvider> _logger;
 }
