@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace TemplateProject.Blazor.Server.Logging;
 
 public class LoggingApplicationHandler<TRequest, TResponse> : IApplicationHandler<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
     public LoggingApplicationHandler(
         IApplicationHandler<TRequest, TResponse> decoratedHandler,

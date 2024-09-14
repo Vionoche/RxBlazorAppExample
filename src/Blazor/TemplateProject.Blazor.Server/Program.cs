@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TemplateProject.Blazor.Server;
 using TemplateProject.Blazor.Server.Authentication;
 using TemplateProject.Blazor.Server.Exceptions;
 using TemplateProject.Blazor.Server.WeatherForecasts;
@@ -22,8 +23,7 @@ builder.Services
     .AddRazorPages();
 
 builder.Services
-    .AddAuthenticationHandlers()
-    .AddWeatherForecastHandlers();
+    .AddHandlers();
 
 var app = builder.Build();
 

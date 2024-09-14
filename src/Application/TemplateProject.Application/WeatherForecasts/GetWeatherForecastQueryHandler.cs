@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationHandlers;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
 using TemplateProject.Application.Abstractions.WeatherForecasts.Models;
 using TemplateProject.WeatherForecasts;
 
 namespace TemplateProject.Application.WeatherForecasts;
 
-public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
+public class GetWeatherForecastQueryHandler : IQueryHandler<GetWeatherForecastQuery, GetWeatherForecastResponse>
 {
     public Task<GetWeatherForecastResponse> Handle(GetWeatherForecastQuery request, CancellationToken cancellationToken)
     {
@@ -29,8 +30,8 @@ public class GetWeatherForecastQueryHandler : IGetWeatherForecastQueryHandler
         return Task.FromResult(new GetWeatherForecastResponse(models));
     }
     
-    private readonly static string[] Summaries = 
-    {
+    private static readonly string[] Summaries =
+    [
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    ];
 }

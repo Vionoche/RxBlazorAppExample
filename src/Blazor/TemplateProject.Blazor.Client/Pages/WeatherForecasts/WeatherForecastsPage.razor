@@ -1,8 +1,9 @@
 ﻿@page "/weather-forecasts"
+
 @using TemplateProject.Application.Abstractions.WeatherForecasts
 @using TemplateProject.Application.Abstractions.WeatherForecasts.Models
 
-@inject IGetWeatherForecastQueryHandler GetWeatherForecastQueryHandler
+@inject IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse> GetWeatherForecastQueryHandler
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -46,9 +47,9 @@
 
     private IReadOnlyCollection<WeatherForecastModel>? _forecasts;
 
-    private readonly List<BreadcrumbItem> _breadcrumbItems = new()
-    {
+    private readonly List<BreadcrumbItem> _breadcrumbItems =
+    [
         new BreadcrumbItem("Home", href: "/"),
         new BreadcrumbItem("Weather Forecast", href: null, disabled: true)
-    };
+    ];
 }

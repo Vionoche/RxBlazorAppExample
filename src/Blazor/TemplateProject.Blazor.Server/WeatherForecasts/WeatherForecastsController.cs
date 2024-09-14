@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationHandlers;
 using Microsoft.AspNetCore.Mvc;
 using TemplateProject.Application.Abstractions.WeatherForecasts;
 
@@ -8,7 +9,8 @@ namespace TemplateProject.Blazor.Server.WeatherForecasts;
 [ApiController]
 public class WeatherForecastsController : ControllerBase
 {
-    public WeatherForecastsController(IGetWeatherForecastQueryHandler getWeatherForecastQueryHandler)
+    public WeatherForecastsController(
+        IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse> getWeatherForecastQueryHandler)
     {
         _getWeatherForecastQueryHandler = getWeatherForecastQueryHandler;
     }
@@ -24,5 +26,5 @@ public class WeatherForecastsController : ControllerBase
         return response;
     }
     
-    private readonly IGetWeatherForecastQueryHandler _getWeatherForecastQueryHandler;
+    private readonly IApplicationHandler<GetWeatherForecastQuery, GetWeatherForecastResponse> _getWeatherForecastQueryHandler;
 }

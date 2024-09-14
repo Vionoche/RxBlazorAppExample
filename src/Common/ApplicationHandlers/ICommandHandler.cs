@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 namespace ApplicationHandlers;
 
 public interface ICommandHandler<in TRequest, TResponse> : IApplicationHandler<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
 }
 
 public interface ICommandHandler<in TRequest> : ICommandHandler<TRequest, Unit>
+    where TRequest : IRequest<Unit>
 {
     async Task<Unit> IApplicationHandler<TRequest, Unit>.Handle(TRequest request, CancellationToken cancellationToken)
     {
